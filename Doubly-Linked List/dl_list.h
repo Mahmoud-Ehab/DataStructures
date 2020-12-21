@@ -73,11 +73,22 @@ namespace dll
 				}
 				
 				//If the index is between 0 and size-1
-				LL_Node *node = firstNode;
-				for (int i = 0; i < index; i++) {
-					node = node->next;
+				//If it's smaller than size/2.. loop over the left half
+				if (index < size/2) {
+					LL_Node *node = firstNode;
+					for (int i = 0; i < index; i++) {
+						node = node->next;
+					}
+					return node;
 				}
-				return node;
+				//Otherwise, loop over the right half
+				else {
+					LL_Node *node = lastNode;
+					for (int i = size - 1; i > index; i--) {
+						node = node->prev;
+					}
+					return node;
+				}
 			}
 			
 			//Return the size of the list
