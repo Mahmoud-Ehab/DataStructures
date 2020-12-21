@@ -91,11 +91,6 @@ namespace dll
 				}
 			}
 			
-			//Return the size of the list
-			int getSize() {
-				return size;
-			}
-			
 			//Remove an element from the list
 			void remove(int index) {
 				if (index >= size || index < 0) {
@@ -145,6 +140,37 @@ namespace dll
 				
 				//Increase the size
 				size++;
+			}
+			
+			//Remove all nodes
+			void clear() {
+				size = 0;
+				//Remove elements from right and left synchronously
+				LL_Node *l = firstNode;
+				LL_Node *r = lastNode;
+				while (l->next != r && l != r) {
+					//Remove one element from the left
+					LL_Node *temp = l;
+					l = l->next;
+					free(temp);
+					//Remove one element from the write
+					temp = r;
+					r = r->prev;
+					free(temp);
+				}
+				
+				if (l == r) {
+					free(l);
+					return;
+				}
+					
+				free(l);
+				free(r);
+			}
+			
+			//Return the size of the list
+			int getSize() {
+				return size;
 			}
 	};
 }

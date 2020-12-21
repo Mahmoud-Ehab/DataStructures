@@ -63,5 +63,11 @@ int main() {
 	list.insert(list.getSize()-1, 6);
 	traverse(list);
 	
+	cout << "************************" << '\n';
+	cout << "Test_6: Testing clear method" << '\n';
+	cout << "************************" << '\n';
+	list.clear();
+	traverse(list);
+	
 	return 0;
 }
