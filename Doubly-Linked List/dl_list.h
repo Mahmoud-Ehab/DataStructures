@@ -19,7 +19,7 @@ namespace dll
 		
 	} LL_Node;
 	
-	//Function to create and return a LL_Node pointer
+	//Function to create LL_Node and return a pointer to it
 	LL_Node* createNode(int entry, LL_Node *n, LL_Node *p) {
 	
 		LL_Node *node = (LL_Node*) malloc(sizeof(LL_Node));

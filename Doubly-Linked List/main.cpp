@@ -54,7 +54,7 @@ int main() {
 	cout << "************************" << '\n';
 	cout << "Test_5: insert new element in the middle" << '\n';
 	cout << "************************" << '\n';
-	list.insert(3, 4);
+	list.insert(2, 4);
 	traverse(list);
 	
 	cout << "************************" << '\n';
