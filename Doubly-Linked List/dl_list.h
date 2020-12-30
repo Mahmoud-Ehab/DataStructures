@@ -11,18 +11,20 @@ namespace dll
 {
 	
 	//Declare (Struct) the linked list node
-	typedef struct LL_Node {
-	
-		int entry;
-		LL_Node *next;
-		LL_Node *prev;
+	template <typename T> class LL_Node {
 		
-	} LL_Node;
+		public:
+			T entry;
+			LL_Node *next;
+			LL_Node *prev;
+		
+	};
 	
 	//Function to create LL_Node and return a pointer to it
-	LL_Node* createNode(int entry, LL_Node *n, LL_Node *p) {
+	template <typename T>
+	LL_Node<T>* createNode(T entry, LL_Node<T> *n, LL_Node<T> *p) {
 	
-		LL_Node *node = (LL_Node*) malloc(sizeof(LL_Node));
+		LL_Node<T> *node = (LL_Node<T>*) malloc(sizeof(LL_Node<T>));
 		node->entry = entry;
 		node->next = n;
 		node->prev = p;
@@ -31,20 +33,21 @@ namespace dll
 	}
 	
 	//Linked List Class
+	template <typename T>
 	class LinkedList
 	{
 		private:
-			LL_Node *firstNode = NULL;
-			LL_Node *lastNode = NULL;
+			LL_Node<T> *firstNode = NULL;
+			LL_Node<T> *lastNode = NULL;
 			int size = 0;
 			
 		public:
 			//Add new element in the list
-			void add(int entry) {
+			void add(T entry) {
 				//The case when its the first element
 				if (firstNode == NULL && lastNode == NULL) {
 				
-					LL_Node *newNode = createNode(entry, NULL, NULL);
+					LL_Node<T> *newNode = createNode<T>(entry, NULL, NULL);
 					firstNode = newNode;
 					lastNode = newNode;
 					
@@ -53,7 +56,7 @@ namespace dll
 				}
 				
 				//Otherwise
-				LL_Node *newNode = createNode(entry, NULL, lastNode); //Create New Node
+				LL_Node<T> *newNode = createNode<T>(entry, NULL, lastNode); //Create New Node
 				lastNode->next = newNode;	//Assign the new node as the next of the lastNode
 				lastNode = newNode;	//Make the lastNode pointer points to the new(last)Node
 				
@@ -61,7 +64,7 @@ namespace dll
 			}
 			
 			//Return the entery of an element in the list
-			LL_Node* get(int index) {
+			LL_Node<T>* get(int index) {
 				if (index >= size || index < 0) {
 					return NULL;
 				}
@@ -75,7 +78,7 @@ namespace dll
 				//If the index is between 0 and size-1
 				//If it's smaller than size/2.. loop over the left half
 				if (index < size/2) {
-					LL_Node *node = firstNode;
+					LL_Node<T> *node = firstNode;
 					for (int i = 0; i < index; i++) {
 						node = node->next;
 					}
@@ -83,7 +86,7 @@ namespace dll
 				}
 				//Otherwise, loop over the right half
 				else {
-					LL_Node *node = lastNode;
+					LL_Node<T> *node = lastNode;
 					for (int i = size - 1; i > index; i--) {
 						node = node->prev;
 					}
@@ -112,7 +115,7 @@ namespace dll
 				}
 				
 				//If the index is between 0 and size-1
-				LL_Node *temp = get(index);
+				LL_Node<T> *temp = get(index);
 				temp->prev->next = temp->next;
 				temp->next->prev = temp->prev;
 				
@@ -121,12 +124,12 @@ namespace dll
 			}
 			
 			//insert a new element in the list
-			void insert(int index, int entry) {
-				LL_Node *sNode = get(index);
+			void insert(int index, T entry) {
+				LL_Node<T> *sNode = get(index);
 				if (sNode == NULL) return;
 				
 				//Allocate new node in the ram
-				LL_Node *newNode = createNode(entry, sNode, sNode->prev);
+				LL_Node<T> *newNode = createNode<T>(entry, sNode, sNode->prev);
 				
 				//If index == 0, the user is insering in the first index
 				if (sNode->prev == NULL)
@@ -146,11 +149,11 @@ namespace dll
 			void clear() {
 				size = 0;
 				//Remove elements from right and left synchronously
-				LL_Node *l = firstNode;
-				LL_Node *r = lastNode;
+				LL_Node<T> *l = firstNode;
+				LL_Node<T> *r = lastNode;
 				while (l->next != r && l != r) {
 					//Remove one element from the left
-					LL_Node *temp = l;
+					LL_Node<T> *temp = l;
 					l = l->next;
 					free(temp);
 					//Remove one element from the write

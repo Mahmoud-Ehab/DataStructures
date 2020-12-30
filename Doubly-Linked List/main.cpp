@@ -4,8 +4,8 @@
 using namespace std;
 using namespace dll;
 
-void traverse(LinkedList list) {
-	LL_Node *temp = list.get(0);
+void traverse(LinkedList<int> list) {
+	LL_Node<int> *temp = list.get(0);
 	while (temp != NULL) {
 		cout << temp->entry << '\n';
 		temp = temp->next;
@@ -13,7 +13,7 @@ void traverse(LinkedList list) {
 }
 
 int main() {
-	LinkedList list;
+	LinkedList<int> list;
 	
 	cout << "************************" << '\n';
 	cout << "Test_0:  adding elements" << '\n';
